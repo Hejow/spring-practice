@@ -114,4 +114,9 @@ public class MemoRepositoryTests {
     public void testDeleteQueryMethods() {
         memoRepository.deleteMemoByMnoLessThan(10L);
     }
+
+    @Test
+    public void testQueryAnnotation() {
+        memoRepository.updateMemoText(10L, "im john");
+    }
 }
