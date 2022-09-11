@@ -30,7 +30,6 @@ public class GuestbookServiceImpl implements GuestbookService {
         log.info(entity);
 
         repository.save(entity);
-
         return entity.getGno();
     }
 
