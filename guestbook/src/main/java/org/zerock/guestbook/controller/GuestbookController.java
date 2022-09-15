@@ -14,32 +14,40 @@ import org.zerock.guestbook.dto.PageRequestDTO;
 import org.zerock.guestbook.service.GuestbookService;
 
 @Controller
-@Log4j2
 @RequestMapping("/guestbook")
-@RequiredArgsConstructor
+@Log4j2
+@RequiredArgsConstructor //자동 주입을 위한 Annotation
 public class GuestbookController {
-    private final GuestbookService service;
+
+    private final GuestbookService service; //final로 선언
 
     @GetMapping("/")
     public String index() {
+
         return "redirect:/guestbook/list";
     }
 
+
     @GetMapping("/list")
-    public void list(PageRequestDTO pageRequestDTO, Model model) {
-        log.info("list................." + pageRequestDTO);
+    public void list(PageRequestDTO pageRequestDTO, Model model){
+
+        log.info("list............." + pageRequestDTO);
+
         model.addAttribute("result", service.getList(pageRequestDTO));
+
     }
 
     @GetMapping("/register")
-    public void register() {
-        log.info("register get....");
+    public void register(){
+        log.info("regiser get...");
     }
 
     @PostMapping("/register")
-    public String registerPost(GuestbookDTO dto, RedirectAttributes redirectAttributes) {
-        log.info("dto...." + dto);
+    public String registerPost(GuestbookDTO dto, RedirectAttributes redirectAttributes){
 
+        log.info("dto..." + dto);
+
+        //새로 추가된 엔티티의 번호
         Long gno = service.register(dto);
 
         redirectAttributes.addFlashAttribute("msg", gno);
@@ -47,32 +55,49 @@ public class GuestbookController {
         return "redirect:/guestbook/list";
     }
 
+    //@GetMapping("/read")
+
     @GetMapping({"/read", "/modify"})
-    public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO, Model model) {
-        log.info("gno:" + gno);
+    public void read(long gno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model ){
+
+        log.info("gno: " + gno);
+
         GuestbookDTO dto = service.read(gno);
+
         model.addAttribute("dto", dto);
+
+    }
+
+    @PostMapping("/remove")
+    public String remove(long gno, RedirectAttributes redirectAttributes){
+
+
+        log.info("gno: " + gno);
+
+        service.remove(gno);
+
+        redirectAttributes.addFlashAttribute("msg", gno);
+
+        return "redirect:/guestbook/list";
+
     }
 
     @PostMapping("/modify")
-    public String modify(GuestbookDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, RedirectAttributes redirectAttributes) {
-        log.info("post modify ....");
+    public String modify(GuestbookDTO dto,
+                         @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+                         RedirectAttributes redirectAttributes){
+
+        log.info("post modify.........................................");
         log.info("dto: " + dto);
 
         service.modify(dto);
 
-        redirectAttributes.addFlashAttribute("page", requestDTO.getPage());
-        redirectAttributes.addFlashAttribute("gno", dto.getGno());
+        redirectAttributes.addAttribute("page",requestDTO.getPage());
+        redirectAttributes.addAttribute("type",requestDTO.getType());
+        redirectAttributes.addAttribute("keyword",requestDTO.getKeyword());
+        redirectAttributes.addAttribute("gno",dto.getGno());
 
-        return "redirect:/guestbook/list";
-    }
-
-    @PostMapping("/remove")
-    public String remove(long gno, RedirectAttributes redirectAttributes) {
-        log.info("gno : " + gno);
-        service.remove(gno);
-        redirectAttributes.addFlashAttribute("msg", gno);
-        return "redirect:/guestbook/list";
+        return "redirect:/guestbook/read";
 
     }
 }

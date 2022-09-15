@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.guestbook.dto.GuestbookDTO;
 import org.zerock.guestbook.dto.PageRequestDTO;
 import org.zerock.guestbook.dto.PageResultDTO;
-import org.zerock.guestbook.entitiy.Guestbook;
+import org.zerock.guestbook.entity.Guestbook;
 
 @SpringBootTest
 public class GuestbookServiceTests {
@@ -39,6 +39,30 @@ public class GuestbookServiceTests {
             System.out.println(guestbookDTO);
         }
         System.out.println("------------------------------------");
+        resultDTO.getPageList().forEach(i -> System.out.println(i));
+    }
+
+    @Test
+    public void testSearch() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .type("tc")
+                .keyword("한글")
+                .build();
+
+        PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
+
+        System.out.println("Prev:" + resultDTO.isPrev());
+        System.out.println("Next:" + resultDTO.isNext());
+        System.out.println("Total:" + resultDTO.getTotalPage());
+
+        System.out.println("-----------------------------------------");
+        for (GuestbookDTO guestbookDTO : resultDTO.getDtoList()) {
+            System.out.println(guestbookDTO);
+        }
+
+        System.out.println("-----------------------------------------");
         resultDTO.getPageList().forEach(i -> System.out.println(i));
     }
 }

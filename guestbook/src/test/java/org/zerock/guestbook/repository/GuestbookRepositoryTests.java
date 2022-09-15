@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.zerock.guestbook.entitiy.Guestbook;
-import org.zerock.guestbook.entitiy.QGuestbook;
+import org.zerock.guestbook.entity.Guestbook;
+import org.zerock.guestbook.entity.QGuestbook;
 
 import java.util.Optional;
 import java.util.stream.IntStream;
