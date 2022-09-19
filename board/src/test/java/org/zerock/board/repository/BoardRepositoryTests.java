@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 @SpringBootTest
 public class BoardRepositoryTests {
@@ -25,7 +26,7 @@ public class BoardRepositoryTests {
     @Test
     public void insertBoard() {
         IntStream.rangeClosed(1, 100).forEach(i -> {
-            Member member = Member.builder().email("user" + i + "naver.com").build();
+            Member member = Member.builder().email("user" + i + "@naver.com").build();
 
             Board board = Board.builder()
                     .title("Title..." + i)
