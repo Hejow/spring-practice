@@ -1,5 +1,6 @@
 package org.zerock.board.service;
 
+
 import org.zerock.board.dto.BoardDTO;
 import org.zerock.board.dto.PageRequestDTO;
 import org.zerock.board.dto.PageResultDTO;
@@ -7,6 +8,7 @@ import org.zerock.board.entity.Board;
 import org.zerock.board.entity.Member;
 
 public interface BoardService {
+
     Long register(BoardDTO dto);
 
     PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
@@ -17,7 +19,8 @@ public interface BoardService {
 
     void modify(BoardDTO boardDTO);
 
-    default Board dtoToEntity(BoardDTO dto) {
+    default Board dtoToEntity(BoardDTO dto){
+
         Member member = Member.builder().email(dto.getWriterEmail()).build();
 
         Board board = Board.builder()
@@ -26,11 +29,11 @@ public interface BoardService {
                 .content(dto.getContent())
                 .writer(member)
                 .build();
-
         return board;
     }
 
     default BoardDTO entityToDTO(Board board, Member member, Long replyCount) {
+
         BoardDTO boardDTO = BoardDTO.builder()
                 .bno(board.getBno())
                 .title(board.getTitle())
@@ -39,9 +42,10 @@ public interface BoardService {
                 .modDate(board.getModDate())
                 .writerEmail(member.getEmail())
                 .writerName(member.getName())
-                .replyCount(replyCount.intValue()) // Long이 리턴되니까
+                .replyCount(replyCount.intValue()) //int로 처리하도록
                 .build();
 
         return boardDTO;
+
     }
 }
