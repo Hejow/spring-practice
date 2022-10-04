@@ -1,13 +1,16 @@
 package org.zerock.board.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.board.TestConfig;
 import org.zerock.board.entity.Board;
 import org.zerock.board.entity.Member;
 
@@ -17,11 +20,17 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
+import static org.zerock.board.entity.QBoard.board;
+
 @SpringBootTest
+@Import(TestConfig.class)
 public class BoardRepositoryTests {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    JPAQueryFactory queryFactory;
 
     @Test
     public void insertBoard() {
@@ -97,5 +106,18 @@ public class BoardRepositoryTests {
         Pageable pageable = PageRequest.of(0, 10, Sort.by("title").ascending());
 
         Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
+    }
+
+    @Test
+    public void testQuery()  {
+        Member member = Member.builder().email("test@TEST.com").build();
+
+        Board board = Board.builder()
+                .title("TEST")
+                .content("test")
+                .writer(member)
+                .build();
+
+        boardRepository.save(board);
     }
 }
