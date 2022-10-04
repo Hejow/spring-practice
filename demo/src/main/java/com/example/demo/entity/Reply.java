@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Reply extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,9 @@ public class Reply extends BaseEntity {
 
     private String content;
 
-    private String replyer;
+    @ManyToOne
+    private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private
+    @ManyToOne
+    private Post post;
 }

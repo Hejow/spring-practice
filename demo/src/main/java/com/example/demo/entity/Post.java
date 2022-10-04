@@ -5,7 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Builder
-@Data
+@Entity
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post extends BaseEntity {
@@ -17,6 +18,9 @@ public class Post extends BaseEntity {
 
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private String writer;
+    @ManyToOne
+    private Member member;
+
+    @Column(columnDefinition = "integer default 0")
+    private int viewCount;
 }

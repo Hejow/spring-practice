@@ -21,6 +21,4 @@ public class Member extends BaseEntity {
     private Long id;
 
     private String name;
-
-    private String role;
 }
