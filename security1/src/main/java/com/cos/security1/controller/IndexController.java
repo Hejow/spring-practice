@@ -72,7 +72,7 @@ public class IndexController {
         return "개인정보";
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGER')") // 실행되기 전에 실행, 여러 권한 부여
+    @PreAuthorize("hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')") // 실행되기 전에 실행, 여러 권한 부여
     @GetMapping("/data")
     public @ResponseBody String data() {
         return "데이터정보";
