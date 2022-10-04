@@ -29,7 +29,11 @@ public class SecurityConfig { // << 이게 바로 필터
                 // 권한없는 페이지를 접근할 때 로그인 페이지로 이동
                 .and()
                 .formLogin()
-                .loginPage("/loginForm");
+                .loginPage("/loginForm")
+                // /login 주소 호출 시 시큐리티가 넘겨받아 대신 로그인을 진행.
+                .loginProcessingUrl("/login")
+                // loginForm을 통해서 로그인을 하면 "/"로 보내주지만, 특정 페이즈를 통해서 넘어와서 login시 해당 페이저로 리다이렉트한다.
+                .defaultSuccessUrl("/");
 
         return http.build();
     }
