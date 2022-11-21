@@ -19,8 +19,8 @@ public class SecurityConfig {
     public BCryptPasswordEncoder encodePwd() {
         return new BCryptPasswordEncoder();
     }
+    
     @Bean
-
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
