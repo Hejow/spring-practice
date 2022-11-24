@@ -1,7 +1,9 @@
 package com.cos.jwt.config;
 
 import com.cos.jwt.config.jwt.JwtAuthenticationFilter;
+import com.cos.jwt.config.jwt.JwtAuthorizationFilter;
 import com.cos.jwt.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +16,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CorsConfig corsConfig;
+    private final UserRepository userRepository;
+    private final CorsConfig corsConfig;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,7 +50,7 @@ public class SecurityConfig {
                 // CrossOrigin 인증 X. 시큐리티 필터에 등록 인증 O
                 .addFilter(corsConfig.corsFilter())
                 .addFilter(new JwtAuthenticationFilter(authenticationManager))
-//                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository))
                 ;
         }
     }
