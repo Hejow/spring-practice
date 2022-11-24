@@ -20,6 +20,7 @@ public class CorsConfig {
         config.addAllowedHeader("*");
         // 모든 post, get, put, patch 요청을 허용
         config.addAllowedMethod("*");
+
         source.registerCorsConfiguration("/api/**", config);
         return new CorsFilter(source);
     }
