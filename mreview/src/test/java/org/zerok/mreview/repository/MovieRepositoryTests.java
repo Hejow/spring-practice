@@ -1,13 +1,19 @@
 package org.zerok.mreview.repository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerok.mreview.entity.Movie;
 import org.zerok.mreview.entity.MovieImage;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -41,5 +47,27 @@ public class MovieRepositoryTests {
                 imageRepository.save(movieImage);
             }
         });
+    }
+
+    @Test
+    public void testListPage() {
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "mno"));
+
+        Page<Object[]> result = movieRepository.getListPage(pageRequest) ;
+
+        for (Object[] objects : result.getContent()) {
+            System.out.println(Arrays.toString(objects));
+        }
+    }
+
+    @Test
+    public void 영화모든요소가져오기테스트() {
+        List<Object[]> result = movieRepository.getMovieWithAll(100L);
+
+        System.out.println(result);
+
+        for (Object[] arr : result) {
+            System.out.println(Arrays.toString(arr));
+        }
     }
 }

@@ -3,6 +3,8 @@ package org.zerok.mreview.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerok.mreview.entity.Member;
 
 import java.util.stream.IntStream;
@@ -11,6 +13,8 @@ import java.util.stream.IntStream;
 public class MemberRepositoryTests {
     @Autowired
     private MemberRepository memberRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Test
     public void insertMembers() {
@@ -22,5 +26,17 @@ public class MemberRepositoryTests {
 
             memberRepository.save(member);
         });
+    }
+
+    @Test
+    @Commit
+    public void 유저삭제테스트() {
+        Long memberId = 10L;
+
+        Member member = Member.builder().mid(memberId).build();
+
+        // 외래 키를 가지는 쪽부터 삭제해야 한다.
+        reviewRepository.deleteByMember(member);
+        memberRepository.deleteById(memberId);
     }
 }

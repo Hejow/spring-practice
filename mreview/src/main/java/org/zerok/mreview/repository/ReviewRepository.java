@@ -1,9 +1,22 @@
 package org.zerok.mreview.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
+import org.zerok.mreview.entity.Member;
+import org.zerok.mreview.entity.Movie;
 import org.zerok.mreview.entity.Review;
 
-@Repository
+import java.util.List;
+
+@Transactional
 public interface ReviewRepository extends JpaRepository<Review, Long> {
+    @EntityGraph(attributePaths = "member")
+    List<Review> findByMovie(Movie movie);
+
+    @Modifying
+    @Query("delete from Review r where r.member = :member")
+    void deleteByMember(Member member);
 }
