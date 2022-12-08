@@ -1,4 +1,4 @@
-package org.zerok.mreview.controller;
+package org.zerock.mreview.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

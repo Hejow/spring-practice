@@ -42,6 +42,9 @@ dependencies {
     // QueryDSL 추가
     // QueryDSL APT : 코드 제네레이션 -> QHello 만들어주는 라이브러리
     implementation "com.querydsl:querydsl-apt:5.0.0"
+
+    // Thumbnailator 추가
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
 }
 
 tasks.named('test') {

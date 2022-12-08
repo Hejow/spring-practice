@@ -1,13 +1,13 @@
-package org.zerok.mreview.repository;
+package org.zerock.mreview.repository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerok.mreview.entity.Member;
-import org.zerok.mreview.entity.Movie;
-import org.zerok.mreview.entity.Review;
+import org.zerock.mreview.entity.Member;
+import org.zerock.mreview.entity.Movie;
+import org.zerock.mreview.entity.Review;
 
 import java.util.List;
 

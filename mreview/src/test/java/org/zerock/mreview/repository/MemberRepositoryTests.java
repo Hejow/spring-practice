@@ -1,11 +1,10 @@
-package org.zerok.mreview.repository;
+package org.zerock.mreview.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
-import org.zerok.mreview.entity.Member;
+import org.zerock.mreview.entity.Member;
 
 import java.util.stream.IntStream;
 

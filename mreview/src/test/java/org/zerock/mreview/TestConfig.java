@@ -1,4 +1,4 @@
-package org.zerok.mreview;
+package org.zerock.mreview;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.test.context.TestConfiguration;

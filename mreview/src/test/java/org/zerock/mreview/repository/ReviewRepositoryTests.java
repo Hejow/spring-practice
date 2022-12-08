@@ -1,22 +1,18 @@
-package org.zerok.mreview.repository;
+package org.zerock.mreview.repository;
 
-import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.zerok.mreview.TestConfig;
-import org.zerok.mreview.entity.Member;
-import org.zerok.mreview.entity.Movie;
-import org.zerok.mreview.entity.Review;
+import org.zerock.mreview.TestConfig;
+import org.zerock.mreview.entity.Member;
+import org.zerock.mreview.entity.Movie;
+import org.zerock.mreview.entity.Review;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
-
-import static org.zerok.mreview.entity.QReview.review;
 
 @SpringBootTest
 @Import(TestConfig.class)
