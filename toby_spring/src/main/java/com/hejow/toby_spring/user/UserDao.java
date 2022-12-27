@@ -1,16 +1,32 @@
 package com.hejow.toby_spring.user;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.sql.*;
 
 public class UserDao {
     private static UserDao INSTANCE;
-    private ConnectionMaker connectionMaker;
     private Connection c;
     private User user;
+    private ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
+
+
+    // 스스로 컨테이너에게 요청
+//    public UserDao() {
+//        DaoFactory daoFactory = new DaoFactory();
+//        this.connectionMaker = daoFactory.connectionMaker();
+//    }
+
+    // getBean()의 활용
+//    public UserDao() {
+//        AnnotationConfigApplicationContext context =
+//                new AnnotationConfigApplicationContext(DaoFactory.class);
+//        this.connectionMaker = context.getBean("connectionMaker", ConnectionMaker.class);
+//    }
 
     public static synchronized UserDao getInstance() {
         if (INSTANCE == null) {
