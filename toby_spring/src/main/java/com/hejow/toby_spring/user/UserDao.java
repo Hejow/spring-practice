@@ -10,9 +10,14 @@ public class UserDao {
     private User user;
     private ConnectionMaker connectionMaker;
 
-    public UserDao(ConnectionMaker connectionMaker) {
+    // setter 방식의 DI
+    public void setConnectionMaker(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
+
+//    public UserDao(ConnectionMaker connectionMaker) {
+//        this.connectionMaker = connectionMaker;
+//    }
 
 
     // 스스로 컨테이너에게 요청
@@ -30,7 +35,7 @@ public class UserDao {
 
     public static synchronized UserDao getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new UserDao(new DConnectionMaker());
+            INSTANCE = new UserDao();
         }
         return INSTANCE;
     }
