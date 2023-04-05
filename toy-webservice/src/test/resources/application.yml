@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show-sql: true
+        format_sql: true
+
+  security:
+    oauth2.client:
+      registration:
+        google:
+          client-id: test
+          client-secret: test
+          scope:
+            - email
+            - profile
