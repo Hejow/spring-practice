@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 
 @TestConfiguration
 public class TestConfig {
-    @PersistenceContext
+    @PersistenceContext1
     private EntityManager entityManager;
 
     @Bean
