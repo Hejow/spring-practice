@@ -1,5 +1,6 @@
-spring:
-  security:
-    user:
-      name: "hejow"
-      password: "qwer1234!"
+#spring:
+#  security:
+#    user:
+#      name: "hejow"
+#      password: "qwer1234!"
+#      roles: "USER"
