@@ -15,8 +15,13 @@ public class SecurityController {
         return "/mypage";
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin/1")
     public String admin() {
         return "/admin";
+    }
+
+    @GetMapping("/admin/2")
+    public String admin2() {
+        return "/admin2";
     }
 }
